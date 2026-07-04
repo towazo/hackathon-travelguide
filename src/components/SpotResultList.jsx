@@ -1,20 +1,21 @@
 import SpotCard from "./SpotCard";
 
-// 画面確認用のダミーデータ
-const dummySpots = [
-  { name: "上野公園", description: "自然を楽しみながら休憩できる", reason: "移動ルートの近くにあり気分転換になるため" },
-  { name: "秋葉原", description: "買い物や観光に立ち寄りやすい", reason: "乗り換え駅から近いため" },
-];
-
-function SpotResultList() {
+function SpotResultList({ spots = [] }) {
   return (
-    <div className="p-6 max-w-md mx-auto bg-base-200 min-h-screen">
-      <h2 className="text-xl font-bold mb-4 text-center border-b pb-2">
-        【担当B プレビュー画面】
-      </h2>
-      
+    <div className="p-4">
+      {/* 💡 HTML風のコード（タグ）はここに書きます！ */}
+      <div className="join w-full mb-6 shadow-md">
+        <input 
+          type="text" 
+          placeholder="キーワードを入力..." 
+          className="input input-bordered join-item w-full bg-base-100" 
+        />
+        <button className="btn btn-primary join-item">検索</button>
+      </div>
+
+      {/* スポット一覧 */}
       <div className="flex flex-col gap-4">
-        {dummySpots.map((spot) => (
+        {spots.map((spot) => (
           <SpotCard key={spot.name} spot={spot} />
         ))}
       </div>
@@ -22,6 +23,4 @@ function SpotResultList() {
   );
 }
 
-// 💡 画面を乗っ取るための魔法：
-// App.jsxがこのファイルを呼び出していなくても、この部品自体を「App」という名前で偽装してエクスポートします
 export default SpotResultList;
