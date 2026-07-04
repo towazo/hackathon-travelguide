@@ -1,0 +1,35 @@
+import { useState } from "react";
+import SpotSearchForm from "./components/SpotSearchForm";
+import SpotResultList from "./components/SpotResultList";
+import { getSpots } from "./services/aiSpotService";
+
+function App() {
+    const [spots, setSpots] = useState([]);        // AIが提案したスポット一覧
+    const [loading, setLoading] = useState(false); // AI問い合わせ中かどうか
+    const [error, setError] = useState(null);       // エラーメッセージ
+
+    async function handleSearch(from, to) {
+        setLoading(true);
+        setError(null);
+
+        try {
+            const result = await getSpots(from, to);
+            setSpots(result);
+        } catch (e) {
+            setError("寄り道スポットの取得に失敗しました。");
+        } finally {
+            setLoading(false);
+        }
+    }
+    return (
+        <div className="app">
+            <h1>寄り道スポット提案</h1>
+            <SpotSearchForm onSearch={handleSearch} />
+            {loading && <p>探しています...</p>}
+            {error && <p className="error">{error}</p>}
+            <SpotResultList spots={spots} />
+        </div>
+    );
+}
+
+export default App;
