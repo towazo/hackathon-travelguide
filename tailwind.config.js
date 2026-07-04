@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -8,7 +8,6 @@ export default {
     extend: {},
   },
   plugins: [
-    // daisyuiを読み込む設定
-    import('daisyui').then(m => m.default) || require("daisyui")
+    require("daisyui") // これなら古いNode.jsの仕組みでも確実に動きます！
   ],
 }
