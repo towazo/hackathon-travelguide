@@ -69,9 +69,9 @@ import SpotResultList from "./components/SpotResultList";
 import { getSpots } from "./services/aiSpotService";
 
 function App() {
-  const [spots, setSpots] = useState([]);        // AIが提案したスポット一覧
+  const [spots, setSpots] = useState([]); // AIが提案したスポット一覧
   const [loading, setLoading] = useState(false); // AI問い合わせ中かどうか
-  const [error, setError] = useState(null);       // エラーメッセージ
+  const [error, setError] = useState(null); // エラーメッセージ
 
   // この続きをステップ2以降で書いていく
 }
