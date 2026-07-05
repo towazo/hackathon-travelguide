@@ -1,22 +1,4 @@
-const express = require("express");
 require("dotenv").config();
-
-const app = express();
-app.use(express.json());
-
-app.post("/api/spots", async (req, res) => {
-  const { from, to } = req.body;
-
-  try {
-    const prompt = buildPrompt(from, to);
-    const responseText = await callAI(prompt);
-    const spots = parseSpots(responseText);
-    res.json(spots);
-  } catch (e) {
-    console.error("AIへの問い合わせに失敗しました:", e);
-    res.status(500).json({ message: "寄り道スポットの取得に失敗しました。" });
-  }
-});
 
 function buildPrompt(from, to) {
   return `
@@ -59,7 +41,23 @@ function parseSpots(responseText) {
   }
 }
 
-const PORT = 3001;
-app.listen(PORT, () => {
-  console.log(`サーバーが起動しました: http://localhost:${PORT}`);
-});
+exports.handler = async function (event) {
+  const { from, to } = JSON.parse(event.body);
+
+  try {
+    const prompt = buildPrompt(from, to);
+    const responseText = await callAI(prompt);
+    const spots = parseSpots(responseText);
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify(spots),
+    };
+  } catch (e) {
+    console.error("AIへの問い合わせに失敗しました:", e);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ message: "寄り道スポットの取得に失敗しました。" }),
+    };
+  }
+};
