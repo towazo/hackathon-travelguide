@@ -178,7 +178,7 @@ export async function getSpots(searchParams) {
 
   return response.json();
 }
-```
+``
 
 - `searchParams`には、担当Aが作った`{ from, to, date, meal, indoorOnly, parking }`がそのまま渡ってきます。
 - `body: JSON.stringify(searchParams)`：オブジェクトをそのままサーバーに送ります。以前のように`{ from, to }`と組み立て直す必要がなく、受け取った形をそのまま送るだけなので、むしろシンプルになります。
