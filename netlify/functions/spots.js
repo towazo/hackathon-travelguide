@@ -2,10 +2,10 @@ require("dotenv").config();
 
 function buildPrompt({ from, to, date, meal, indoorOnly, parking }) {
   const conditions = [];
-  if (meal) conditions.push("・食事ができる場所を優先してください。");
-  if (indoorOnly) conditions.push("・屋内の場所を優先してください。");
-  if (parking) conditions.push("・駐車場がある場所を優先してください。");
-  const conditionsBlock = conditions.length > 0 ? `\n【希望条件】\n${conditions.join("\n")}\n` : "";
+  if (meal) conditions.push("・食事ができる場所（レストラン・カフェ・定食屋など、その場で実際に食事ができるお店）だけを提案してください。公園や展望台のように、その場で食事ができない場所は1つも含めないでください。");
+  if (indoorOnly) conditions.push("・屋内の場所だけを提案してください。公園のように屋外がメインの場所は含めないでください。");
+  if (parking) conditions.push("・駐車場がある場所だけを提案してください。駐車場がない、または不明な場所は含めないでください。");
+  const conditionsBlock = conditions.length > 0 ? `\n【必須条件（すべてのスポットが満たすこと）】\n${conditions.join("\n")}\n` : "";
 
   return `あなたは地元の事情に詳しい旅行ガイドです。${date}に${from}から${to}まで移動する人に、その途中で立ち寄れる「寄り道スポット」を3つ提案してください。
 
