@@ -8,12 +8,12 @@ function App() {
     const [loading, setLoading] = useState(false); // AI問い合わせ中かどうか
     const [error, setError] = useState(null);       // エラーメッセージ
 
-    async function handleSearch(from, to) {
+    async function handleSearch(searchParams) {
         setLoading(true);
         setError(null);
 
         try {
-            const result = await getSpots(from, to);
+            const result = await getSpots(searchParams);
             setSpots(result);
         } catch (e) {
             setError("寄り道スポットの取得に失敗しました。");
