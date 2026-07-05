@@ -2,6 +2,7 @@ import { useState } from "react";
 import SpotSearchForm from "./components/SpotSearchForm";
 import SpotResultList from "./components/SpotResultList";
 import { getSpots } from "./services/aiSpotService";
+import logo from "./images/logo.png";
 
 function App() {
     const [spots, setSpots] = useState([]);        // AIが提案したスポット一覧
@@ -23,7 +24,7 @@ function App() {
     }
     return (
         <div className="app">
-            <h1>寄り道スポット提案</h1>
+            <img src={logo} alt="寄り道スポット提案" className="logo" />
             <SpotSearchForm onSearch={handleSearch} />
             {loading && <p>探しています...</p>}
             {error && <p className="error">{error}</p>}

@@ -1,3 +1,10 @@
+.logo {
+  display: block;
+  max-width: 240px;
+  height: auto;
+  margin: 0 auto 16px;
+}
+
 .spot-result-list {
   display: flex;
   flex-direction: column;
