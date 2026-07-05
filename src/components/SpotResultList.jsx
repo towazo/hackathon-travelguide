@@ -1,4 +1,5 @@
 import SpotCard from "./SpotCard";
+import "./../styles/App.css";
 
 function SpotResultList({ spots = [] }) {
   return (
